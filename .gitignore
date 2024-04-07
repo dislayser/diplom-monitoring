@@ -1,0 +1,7 @@
+# Bootstrap иконки
+public/assets/icons/bootstrap-icons/
+
+# Folders
+tests/
+secret/
+ToDo/

@@ -1,0 +1,35 @@
+<?php
+require(__DIR__.'/../../app/Config/Path.php');
+require(DIR.'app/Config/Config.php');
+require(DIR.'app/Controllers/db_main.php');
+require(DIR.'app/Controllers/functions.php');
+require(DIR.'app/Controllers/Auth.php');
+
+require(DIR.'app/Controllers/Admin.php');
+?>
+<!DOCTYPE html>
+<html lang="ru" class="h-100" data-bs-theme="<?=$_COOKIE['theme']?>">
+
+<?php require(DIR . 'app/Views/HEAD.php');?>
+
+<body class="d-flex flex-column h-100">
+    <?php include(DIR . 'app/Views/Header.php');?>
+
+    <main class="d-flex flex-nowrap">
+        <?php include(DIR . 'app/Views/AdminSidebar.php');?>
+
+        <div class="container">
+            <div class="d-flex my-3 justify-content-center align-items-center" id="table-titel">
+                <span class="h4">Таблица</span>
+            </div>
+            <?php include(DIR . 'app/Views/AdminToolbar.php');?>
+            <?php include(DIR . 'app/Views/Table.php');?>
+        </div>
+    </main>
+    <?php include(DIR . 'app/Views/ThemeButton.php');?>
+
+    <?php include(DIR . 'app/Views/Footer.php');?>
+    <script src="<?=BASE_URL?>assets/js/admin-table-titel.js"></script>
+</body>
+
+</html>
