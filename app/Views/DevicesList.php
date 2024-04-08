@@ -36,8 +36,11 @@ function table_link($id, $type = "edit"){
             <h6 class="card-subtitle text-truncate mb-2 text-body-secondary"><?=$row['zone']?></h6>
             <p class="card-text d-flex align-items-center text-wrap font-monospace gap-2">
                 API: 
-                <input id="api_token" type="text" class="form-control form-control-sm" value="<?=$row['api_token']?>">
+                <input id="api_token" type="text" class="form-control form-control-sm" value="<?=$row['api_token']?>" readonly>
                 <button type="button" id="copy" class="btn btn-sm btn-outline-primary" data-parent=".card" data-target="#api_token" data-tooltip="Копировать"><i class="bi-clipboard"></i></button>
+            </p>
+            <p class="card-text">
+                <?=$row['description']?>
             </p>
             <a href="<?=table_link($row['id'])?>" class="card-link">Редактировать</a>
             <a class="card-link link-danger c-pointer" data-bs-toggle="modal" data-bs-target="#modal_delete" data-row-name="<?=$row['name']?>" data-row-id="<?=$row['id']?>">Удалить</a>

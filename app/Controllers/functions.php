@@ -82,6 +82,7 @@ function ren_col($index){
         'url' => 'URL',
         'rule' => 'Роль',
         'id_rule' => 'Роль',
+        'description' => 'Описание',
     );
 
     if (isset($cols[$index])){

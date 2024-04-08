@@ -1,7 +1,13 @@
-import { show_toast, toast_block } from './toast.js';
-
+//import { show_toast, toast_block } from './toast.js';
 $(document).ready(function() {
     var form_submitted = false;
+    
+    var toasts = new Toast({
+        logo: SITE_LOGO,
+        site: SITE_NAME_HTML,
+        time: 'Только что',
+        msg: 'Скопировано.'
+    });
 
     //Отправка формы
     $("form").submit(function(event) {
@@ -44,13 +50,7 @@ $(document).ready(function() {
         
         block.select();
         if (document.execCommand("copy")){
-            var block = toast_block({
-                logo: SITE_LOGO,
-                site: SITE_NAME_HTML,
-                time: 'Только что',
-                msg: 'Скопировано.'
-            });
-            show_toast(block);
+            toasts.create();
         };
     });
 

@@ -11,6 +11,7 @@ require(DIR.'app/Controllers/Auth.php');
 <?php require(DIR . 'app/Views/HEAD.php');?>
 
 <body class="d-flex flex-column h-100">
+    <?php include(DIR . 'app/Views/UI.php');?>
     <?php include(DIR . 'app/Views/Header.php');?>
 
     <main>

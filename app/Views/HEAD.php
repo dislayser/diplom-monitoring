@@ -22,5 +22,6 @@
         const SITE_LOGO_SVG_NAME = `<?=SITE_LOGO_SVG_NAME?>`;
         const SITE_LOGO = `<?=SITE_LOGO?>`;
     </script>
-    <script src="<?=BASE_URL?>assets/js/main.js" type="module"></script>
+    <script src="<?=BASE_URL?>assets/js/toast.js"></script>
+    <script src="<?=BASE_URL?>assets/js/main.js"></script>
 </head>

@@ -9,6 +9,8 @@ define('LOGIN_URL',             BASE_URL . 'login');
 define('LOGOUT_URL',            BASE_URL . 'logout');
 define('ADMIN_URL',             BASE_URL . 'admin/');
 
+define('AJAX_PROFILE_URL',      BASE_URL . 'ajax/Profile');
+
 //main path
 define('DIR',                    __DIR__."/../../");
 ?>
