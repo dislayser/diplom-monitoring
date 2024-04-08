@@ -2,10 +2,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?=SITE_NAME." | ".site_subname();?></title>
-    <link href="<?=BASE_URL?>assets/icons/<?=SITE_LOGO_SVG_NAME?>.svg" rel="icon" type="image/svg+xml">   
+    <link href="<?=BASE_URL?>assets/icons/<?=SITE_LOGO_SVG_NAME?>.svg" rel="icon" type="image/svg+xml">
     <!-- Мета -->
-    <meta name="description" content="<?=SITE_NAME?> - веб-приложение, для пользования сотрудниками компании">
-    <meta name="keywords" content="Удобный интерфейс, веб-приложение, <?=SITE_NAME?>">
+    <meta name="description" content="<?=SITE_NAME?> - веб-приложение, для мониторинга газа в местности сотрудниками компании">
+    <meta name="keywords" content="Удобный интерфейс, мониторинг, веб-приложение, <?=SITE_NAME?>">
     <!-- Подключение Bootstrap -->
     <link href="<?=BASE_URL?>assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?=BASE_URL?>assets/css/bootstrap.dropdowns.css" rel="stylesheet">
@@ -16,5 +16,11 @@
     <script src="<?=BASE_URL?>assets/js/jquery-3.7.1.min.js"></script>
     <script src="<?=BASE_URL?>assets/js/bootstrap.bundle.min.js"></script>
     <!-- Мои скрипты -->
-    <script src="<?=BASE_URL?>assets/js/main.js"></script>
+    <script>
+        const SITE_NAME = `<?=SITE_NAME?>`;
+        const SITE_NAME_HTML = `<?=SITE_NAME_HTML?>`;
+        const SITE_LOGO_SVG_NAME = `<?=SITE_LOGO_SVG_NAME?>`;
+        const SITE_LOGO = `<?=SITE_LOGO?>`;
+    </script>
+    <script src="<?=BASE_URL?>assets/js/main.js" type="module"></script>
 </head>

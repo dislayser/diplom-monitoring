@@ -1,11 +1,16 @@
 <?php
 $sidebar_items = array(
+    ['', 'Главная', 'house'],
     ['users', 'Пользователи', 'person'],
     ['devices', 'Устройства', 'controller'],
+    ['device_statuses', 'Статусы устройства', 'question'],
+    ['user_rules', 'Права пользователей', 'award'],
+    ['errors', 'Ошибки', 'bug'],
+    
 );
 ?>
 <!-- Боковая панель для админ панели -->
-<div class="offcanvas offcanvas-start w-auto shadow-lg" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="AdminSidebar" aria-labelledby="AdminSidebarLabel">
+<div class="offcanvas offcanvas-start w-auto shadow-lg" data-bs-scroll="true" tabindex="-1" id="AdminSidebar" aria-labelledby="AdminSidebarLabel">
 
     <div class="offcanvas-header border-bottom">
         <h5 class="offcanvas-title me-2" id="AdminSidebarLabel">Панель управления</h5>
@@ -15,12 +20,28 @@ $sidebar_items = array(
     <div class="offcanvas-body">
         <ul class="nav nav-pills flex-column mb-auto">
             <?php foreach($sidebar_items as $nav_item):?>
-            <li class="nav-item">
-                <a href="?table=<?=$nav_item[0]?>" class="nav-link <?=$table_name == $nav_item[0] ? 'active' : 'link-body-emphasis'?>">
-                    <i class="bi-<?=$nav_item[2]?> me-2"></i>
-                    <?=$nav_item[1]?>
-                </a>
-            </li>
+                <?php if ($nav_item[0] == 'errors'): ?>
+                <li class="nav-item">
+                    <a href="?table=<?=$nav_item[0]?>" class="nav-link <?=$table_name == $nav_item[0] ? 'active bg-danger' : 'link-danger'?>">
+                        <i class="bi-<?=$nav_item[2]?> me-2"></i>
+                        <?=$nav_item[1]?>
+                    </a>
+                </li>
+                <?php else: ?>
+                <li class="nav-item">
+                    <a href="<?php
+                    if (!empty($nav_item[0])){
+                        echo '?table='.$nav_item[0]; 
+                    }else{
+                        echo ADMIN_URL;
+                    }
+                    ?>"
+                    class="nav-link <?=$table_name == $nav_item[0] ? 'active' : 'link-body-emphasis'?>">
+                        <i class="bi-<?=$nav_item[2]?> me-2"></i>
+                        <?=$nav_item[1]?>
+                    </a>
+                </li>
+                <?php endif;?>
             <?php endforeach;?>
         </ul>
     </div>

@@ -129,13 +129,13 @@ class Database {
             $values = implode(", ", array_fill(0, count($params), "?"));
         
             $sql = "INSERT INTO $table ($columns) VALUES ($values)";
-        
+            
             try {
                 $query = $this->conn->prepare($sql);
                 $query->execute(array_values($params));
             } catch (PDOException $e) {
                 //При ошибки запроса, запись в логи ошибок
-                $this->error_log();
+                $this->error_log($e->getMessage(), $params);
                 //errors_db_log($e->getMessage(), $params);
                 //exit;
             }
@@ -171,14 +171,26 @@ class Database {
         } catch(PDOException $e) {
             // Обработка ошибок запроса
             // Например, можно записать ошибку в логи
-            $this->error_log($e->getMessage());
+            $this->error_log($e->getMessage(), $params);
             return false; // Возвращаем false в случае ошибки
         }
     }    
 
     //Для уничтожения записей
-    public function delete(){
+    public function delete($table, $params){
+        $sql = "DELETE FROM $table";
+        $sql .= $this->where($params);
         
+        try {
+            $query = $this->conn->prepare($sql);
+            $query->execute(array_values($params));
+        } catch (PDOException $e) {
+            //При ошибки запроса, запись в логи ошибок
+            $this->error_log($e->getMessage(), $params);
+            //errors_db_log($e->getMessage(), $params);
+            //exit;
+        }
+        return $this;
     }
 
     //Для множественной выборки строк
@@ -226,7 +238,7 @@ class Database {
             //При ошибки запроса, запись в логи ошибок
             $this->error_log($e->getMessage());
         }
-
+        
         return $this;
     }
 
@@ -255,7 +267,7 @@ class Database {
         } catch(PDOException $e) {
             // Обработка ошибок запроса
             // Например, можно записать ошибку в логи
-            $this->error_log($e->getMessage());
+            $this->error_log($e->getMessage(), $params);
             return false; // Возвращаем false в случае ошибки
         }
     }
@@ -269,7 +281,7 @@ class Database {
         }  catch(PDOException $e) {
             // Обработка ошибок запроса
             // Например, можно записать ошибку в логи
-            $this->error_log($e->getMessage());
+            $this->error_log($e->getMessage(), $params);
             return false; // Возвращаем false в случае ошибки
         }
     }
@@ -283,8 +295,16 @@ class Database {
         }
     }
     //Для записи ошибок - возможно стоит сделать это за классом
-    private function error_log(){
+    private function error_log($error, $params_data = []){
+        print_r($error);
+        $post = [
+            'id_user' => $_SESSION['id'],
+            'url' => $_SERVER['REQUEST_URI'],
+            'error' => $error,
+            'params' => json_encode($params_data),
+        ];
         
+        return $this->insert('errors', $post);
     }
 }
 ?>

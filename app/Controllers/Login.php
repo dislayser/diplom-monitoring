@@ -7,7 +7,8 @@ function auth($userdata, $DB){
         $_SESSION['auth'] = true;
         $_SESSION['id'] = $userdata['id'];
         $_SESSION['login'] = $userdata['login'];
-        $_SESSION['name'] = $userdata['name'];
+        $_SESSION['name'] = $userdata['name']; 
+        $_SESSION['rule'] = $DB->select_one('user_rules', ['id' => $userdata['id_rule']])->data['rule'];
         if(isset($_SESSION['attempts'])){
             unset($_SESSION['attempts']);
         }
@@ -21,7 +22,7 @@ function auth($userdata, $DB){
         return true;
     }
     return false;
-} 
+}
 
 $errMsg = '';
 $form_data = [
@@ -93,8 +94,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-login'])){
                 if ($form_data['remember_me'] == '1') {
                     // Установка куки с идентификатором сессии
                     $session_id = session_id();
+                    $ip = $_SERVER['REMOTE_ADDR'];
                     setcookie('session_id', $session_id, time() + 60 * 60 * 24 * 30, '/', null, 0, 1);
-                    $DB->update('users', $userdata['id'], ['session_id' => $session_id]);
+                    $DB->update('users', $userdata['id'], ['session_id' => $session_id, 'ip' => $ip]);
                 }
 
                 auth($userdata, $DB);

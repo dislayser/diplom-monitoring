@@ -4,6 +4,8 @@ require(DIR.'app/Config/Config.php');
 require(DIR.'app/Controllers/db_main.php');
 require(DIR.'app/Controllers/functions.php');
 require(DIR.'app/Controllers/Auth.php');
+
+require(DIR.'app/Controllers/Profile.php');
 ?>
 <!DOCTYPE html>
 <html lang="ru" class="h-100" data-bs-theme="<?=$_COOKIE['theme']?>">
@@ -14,7 +16,9 @@ require(DIR.'app/Controllers/Auth.php');
     <?php include(DIR . 'app/Views/Header.php');?>
 
     <main>
-        
+        <div class="container-lg col-lg-7">
+            <?php include(DIR . 'app/Views/ProfileForm.php');?>
+        </div>
     </main>
 
     <?php include(DIR . 'app/Views/ThemeButton.php');?>

@@ -28,13 +28,35 @@ function arr_clear(&$arr){
         if ($item === ''){
             $item = null;
         }
+        $item = trim($item);
     } 
+    return $arr;
+}
+
+//Получение данных для формы
+function get_formData($table_name){
+    global $DB;
+    global $table_name;
+    $arr = array();
+    if(isset($_GET['id'])){
+        $arr = $DB->select_one($table_name, ['id' => (int)$_GET['id']])->data;
+    }
     return $arr;
 }
 
 //Сокращенная функция перехода на страницу
 function go($url){
     header('Location: '. $url);
+    exit;
+}
+
+//Для получения парамеров поиска
+function get_search(){
+    $q = array();
+    if (isset($_GET['q']) && isset($_GET['col-search'])) {
+        $q[$_GET['col-search']] = "%".$_GET['q']."%";
+    }
+    return $q;
 }
 
 //Переимнование столба
@@ -46,12 +68,20 @@ function ren_col($index){
         'created' => 'Создан',
         'status' => 'Статус',
         'login' => 'Логин',
+        'last_auth' => 'Онлайн',
         'api_token' => 'API Токен',
         'zone' => 'Местоположение',
         'deleted' => 'Удален',
         'password' => 'Пароль',
         'session_id' => 'Сохр. сессия',
         'ip' => 'IP адрес',
+        'priority' => 'Приоритет',
+        'error' => 'Тест ошибки',
+        'id_user' => 'Пользователь',
+        'params' => 'Данные',
+        'url' => 'URL',
+        'rule' => 'Роль',
+        'id_rule' => 'Роль',
     );
 
     if (isset($cols[$index])){
