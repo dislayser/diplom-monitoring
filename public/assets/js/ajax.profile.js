@@ -13,8 +13,9 @@ $(document).ready(function(){
     });
     //Вставка данных
     function to_form(data){
-        $(login).val(data.login);
+        $('#login').val(data.login);
         $('#name').val(data.name);
+        $('#theme').val(data.theme);
     }
 
     //Отправка данных

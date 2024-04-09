@@ -21,6 +21,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     if(checkToken($token)) {
         if ($DB->update('users', (int)$id, $_POST)){
+            $_SESSION['name'] = $_POST['name'];
+            $_SESSION['login'] = $_POST['login'];
+            $_SESSION['theme'] = $_POST['theme'];
             output(['status' => 200]);
         }else{
             output(['status' => 404]);

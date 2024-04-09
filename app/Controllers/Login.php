@@ -7,7 +7,8 @@ function auth($userdata, $DB){
         $_SESSION['auth'] = true;
         $_SESSION['id'] = $userdata['id'];
         $_SESSION['login'] = $userdata['login'];
-        $_SESSION['name'] = $userdata['name']; 
+        $_SESSION['name'] = $userdata['name'];
+        $_SESSION['theme'] = $userdata['theme'];
         $_SESSION['rule'] = $DB->select_one('user_rules', ['id' => $userdata['id_rule']])->data['rule'];
         if(isset($_SESSION['attempts'])){
             unset($_SESSION['attempts']);

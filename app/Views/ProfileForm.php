@@ -15,6 +15,25 @@
             <label class="form-label" for="login">Логин</label>
             <input class="form-control" name="login" id="login" type="text" placeholder="Введите логин">
         </div>
+        <div class="col-12 col-md-6">
+            <?php
+                $themes_dir = DIR.'public/assets/css/themes';
+                $themes_dir_files = scandir($themes_dir);
+
+                $themes = array_filter($themes_dir_files, function($item) use ($themes_dir) {
+                    return is_dir($themes_dir . '/' . $item) && !in_array($item, ['.', '..']);
+                });
+            ?>
+            <label class="form-label" for="theme">Тема</label>
+            <select class="form-select" name="theme" id="theme">
+                <?php
+                    echo '<option value="">classic</option>';
+                foreach($themes as $theme){
+                    echo '<option value="'.$theme.'">'.$theme.'</option>';
+                }
+                ?>
+            </select>
+        </div>
     </div>
     <?=fieldToken()?>
     <!-- Кнпоки -->

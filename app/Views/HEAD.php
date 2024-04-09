@@ -7,7 +7,13 @@
     <meta name="description" content="<?=SITE_NAME?> - веб-приложение, для мониторинга газа в местности сотрудниками компании">
     <meta name="keywords" content="Удобный интерфейс, мониторинг, веб-приложение, <?=SITE_NAME?>">
     <!-- Подключение Bootstrap -->
-    <link href="<?=BASE_URL?>assets/css/bootstrap.min.css" rel="stylesheet">
+    <?php
+    $css = '';
+    if(isset($_SESSION['theme']) && !empty($_SESSION['theme'])){
+        $css = '/themes/' . $_SESSION['theme'];
+    }
+    ?>
+    <link href="<?=BASE_URL?>assets/css<?=$css?>/bootstrap.min.css" rel="stylesheet" id="main_css">
     <link href="<?=BASE_URL?>assets/css/bootstrap.dropdowns.css" rel="stylesheet">
     <link href="<?=BASE_URL?>assets/icons/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet">
     <!-- Мои стили -->

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 :root,[data-bs-theme=light]{
     --bs-gray-200:#e9ecef;
-	--bs-primary:#6610f2;
+    /*--bs-primary:#6610f2;*/
     --bs-footer:#212529;
     --bs-svg:#000;
 
@@ -21,7 +21,7 @@
 }
 [data-bs-theme=dark]{
     --bs-gray-200:#212529;
-	--bs-primary:#6610f2;
+    /*--bs-primary:#6610f2;*/
     --bs-footer:#2b2f32;
     --bs-svg:#fff;
 
@@ -41,6 +41,12 @@
     
 }
 
+/*Курсор с пальцем*/
+.c-pointer{
+    cursor: pointer;
+}
+
+/*
 body{
     background: var(--bs-gray-200);
 }
@@ -52,6 +58,7 @@ header{
 footer{
     background: var(--bs-footer);
 }
+*/
 
 /*BACKGROUNDS*/
 .bg-blue{
@@ -97,9 +104,6 @@ footer{
 }
 
 
-.c-pointer{
-    cursor: pointer;
-}
 
 
 /*Для подсказок*/
@@ -111,7 +115,7 @@ footer{
     content: attr(data-tooltip);
     position: absolute;
     min-width: 100%;
-    left: 0;
+    left: -100%;
     top: 100%;
     z-index: 1; /*Слой обьекта*/
     color: #fff; /* Цвет текста подсказки */
