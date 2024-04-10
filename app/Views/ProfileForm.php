@@ -2,8 +2,8 @@
 
 ?>
 
+<div class="h4 my-5">Редактирование профиля</div>
 <form action="<?=AJAX_PROFILE_URL?>" method="post" class="my-3">
-    <div class="h4">Редактирование профиля</div>
     <hr>
     <input type="hidden" name="id" id="id" value="<?=$_SESSION['id']?>">
     <div class="row g-3">
@@ -39,6 +39,6 @@
     <!-- Кнпоки -->
     <hr>
     <div class="d-flex gap-3 flex-row-reverse">
-        <button type="submit" class="btn btn-primary" name="<?=$_GET['type']?>">Сохранить</button>
+        <button type="submit" class="btn btn-primary" name="save">Сохранить</button>
     </div>
 </form>

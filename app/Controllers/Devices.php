@@ -4,7 +4,6 @@ $table_params = get_search();
 $table_structure = $DB->describe($table_name)->data;
 $form_data = get_formData($table_name);
 
-
 //Создание записи
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])){
     unset($_POST['add']);
@@ -26,9 +25,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])){
     }
 
 }
-
 //Изменение записи
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit']) && isset($_GET['id'])){
+    
     unset($_POST['edit']);
     if (isset($_POST['token'])){
         $token = $_POST['token'];
@@ -64,6 +63,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete']) && isset($_G
         }
     }
 }
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+}
 xss($form_data)
 ?>

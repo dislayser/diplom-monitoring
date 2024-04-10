@@ -1,4 +1,6 @@
 <?php
+//main path
+define('DIR',                    __DIR__."/../../");
 //Конфигурация с ссылками
 $domain = 'dislayser';
 define('BASE_URL',              $_SERVER['REQUEST_SCHEME'].'://'.$domain.'/');
@@ -10,7 +12,6 @@ define('LOGOUT_URL',            BASE_URL . 'logout');
 define('ADMIN_URL',             BASE_URL . 'admin/');
 
 define('AJAX_PROFILE_URL',      BASE_URL . 'ajax/Profile');
+define('IMG_MONITORING',        BASE_URL . 'assets/img/data/monitoring/');
 
-//main path
-define('DIR',                    __DIR__."/../../");
 ?>

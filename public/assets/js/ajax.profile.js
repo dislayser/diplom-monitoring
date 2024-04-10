@@ -30,6 +30,8 @@ $(document).ready(function(){
             }else{
                 profile_toasts.params.msg = 'Ошибка запроса.';
             }
+            console.log(e);
+            $('form').find(":submit[name='" + e.originalEvent.submitter.name + "']").prop('disabled', false);
             profile_toasts.create();
         });
     });

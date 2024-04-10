@@ -28,7 +28,7 @@ require(DIR.'app/Controllers/Admin.php');
                     <?php include(DIR . 'app/Views/AdminForms.php');?>
                 </div>
             <?php elseif(!isset($_GET['type'])):?>
-                <div class="d-flex my-3 justify-content-center align-items-center" id="table-titel">
+                <div class="d-flex my-5" id="table-titel">
                     <span class="h4">Таблица</span>
                 </div>
                 <?php include(DIR . 'app/Views/TableToolbar.php');?>

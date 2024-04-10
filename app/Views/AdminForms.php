@@ -56,12 +56,12 @@ function input($item){
     }
 
     //Список для полей статус
-    if ($item['Field'] == 'status'){
+    if ($item['Field'] == 'id_status'){
         $select.= ' name="'.$item['Field'].'" id="'.$item['Field'].'">';
         $statuses = $DB->select('device_statuses')->data;
         foreach ($statuses as $status){
             $selected = '';
-            if (isset($form_data['status']) && $status['id'] == $form_data['status']) {
+            if (isset($form_data['id_status']) && $status['id'] == $form_data['id_status']) {
                 $selected .= 'selected';
             } 
             $select.= '<option value="'.$status['id'].'" '.$selected.'>'.$status['name'].'</option>';
@@ -101,7 +101,7 @@ function input($item){
     $input .= '>';
     $select.= '</select>';
     
-    if ($item['Field'] == 'status' || $item['Field'] == 'id_rule' || $item['Field'] == 'id_user' ){
+    if ($item['Field'] == 'id_status' || $item['Field'] == 'id_rule' || $item['Field'] == 'id_user' ){
         return $label.$select;
     }
 

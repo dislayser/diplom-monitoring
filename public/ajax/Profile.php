@@ -28,6 +28,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         }else{
             output(['status' => 404]);
         }
+    }else{
+        output(['status' => 403]);
     }
 }
 
@@ -37,6 +39,8 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
         $profile_data = $DB->select_one('users', ['id' => (int)$_SESSION['id']])->data;
         xss($profile_data);
         output($profile_data);
+    }else{
+        output(['status' => 404, 'error_desc' => 'session.id not found']);
     }
 }
 

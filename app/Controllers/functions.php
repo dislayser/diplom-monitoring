@@ -67,6 +67,7 @@ function ren_col($index){
         'name' => 'Имя',
         'created' => 'Создан',
         'status' => 'Статус',
+        'id_status' => 'Статус',
         'login' => 'Логин',
         'last_auth' => 'Онлайн',
         'api_token' => 'API Токен',

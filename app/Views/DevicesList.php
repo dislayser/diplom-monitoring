@@ -26,7 +26,7 @@ function table_link($id, $type = "edit"){
                 <h5 class="text-truncate card-title "><?=$row['name']?></h5>
                 <div>
                     <?php
-                        $status = $DB->select_one('device_statuses', ['id' => $row['status']])->data;
+                        $status = $DB->select_one('device_statuses', ['id' => $row['id_status']])->data;
                         xss($status);
                     ?>
                     <span class="badge rounded-pill bg-<?=$status['status']?>"><?=$status['name']?></span>
