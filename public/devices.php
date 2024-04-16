@@ -40,7 +40,8 @@ require(DIR.'app/Controllers/Devices.php');
     <?php include(DIR . 'app/Views/ThemeButton.php');?>
 
     <?php include(DIR . 'app/Views/Footer.php');?>
-    <script src="<?=BASE_URL?>assets/js/table_links.js"></script>
+    <script src="<?=BASE_URL?>assets/js/ajax.func.js"></script>
+    <script src="<?=BASE_URL?>assets/js/ajax.gen_token.js"></script>
 </body>
 
 </html>

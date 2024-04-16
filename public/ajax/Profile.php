@@ -5,6 +5,7 @@ require(DIR.'app/Controllers/db_main.php');
 require(DIR.'app/Controllers/functions.php');
 require(DIR.'app/Controllers/Auth.php');
 
+// Для вывода данных в JSON
 header('Content-Type: application/json');
 //Сохранение профиля
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -44,9 +45,4 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
     }
 }
 
-// Возвращаем данные в формате JSON
-function output($data){
-    echo json_encode($data);
-    exit;
-}
 ?>

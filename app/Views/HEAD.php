@@ -23,6 +23,7 @@
     <script src="<?=BASE_URL?>assets/js/bootstrap.bundle.min.js"></script>
     <!-- Мои скрипты -->
     <script>
+        const BASE_URL = `<?=BASE_URL?>`;
         const SITE_NAME = `<?=SITE_NAME?>`;
         const SITE_NAME_HTML = `<?=SITE_NAME_HTML?>`;
         const SITE_LOGO_SVG_NAME = `<?=SITE_LOGO_SVG_NAME?>`;

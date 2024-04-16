@@ -1,6 +1,10 @@
 $(document).ready(function() {
     const map_item = $('img#map');
 
+    function grid_create(){
+        
+    }
+
     // Данные карты
     let map = {
         'x': map_item.width(),
@@ -11,15 +15,52 @@ $(document).ready(function() {
     let sector = {
         'x': 120,
         'y': 120,
-        'opacity': 0.3,
+        'opacity': 0.4,
     }
 
     function rand(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min; // Максимум и минимум включаются
-      }
+    }
     
+    function grid_line(i, j, params = {}){
+        
+        let grid_item = $('<div></div>');
+        grid_item.addClass('grid-line');
+
+        // Вычисляем позицию элемента
+        let posX = i * sector.x;
+        let posY = j * sector.y;
+
+        if (i == 0){
+            // Устанавливаем позицию элемента
+            grid_item.css({
+                'position': 'absolute',
+                'left': posX + 'px',
+                'top': posY + 'px',
+                'width': map.x + 'px',
+                'height': '1px',
+                'background-color': 'black',
+            });
+        }
+        if (j == 0){
+            // Устанавливаем позицию элемента
+            grid_item.css({
+                'position': 'absolute',
+                'left': posX + 'px',
+                'top': posY + 'px',
+                'width': '1px',
+                'height': map.y + 'px',
+                'background-color': 'black',
+            });
+        }
+        
+
+
+        return grid_item;
+    }
+
     // Функция, возвращающая блок 
     function grid_item(i, j, params = {}) {
         let grid_item = $('<div></div>');
@@ -60,7 +101,11 @@ $(document).ready(function() {
     for (let i = 0; i < map_grid.x; i++) {
         for (let j = 0; j < map_grid.y; j++) {
             // Создаем элемент для отображения номера сектора
-            if (i && j && 40<rand(1,100)){
+            if (i == 0 || j == 0) {
+                let grid_l = grid_line(i,j);     
+                //$('#visual').append(grid_l);            
+            }
+            if (i && j && 40<rand(1, 100)){
 
                 let grid = grid_item(i,j);
             

@@ -40,7 +40,7 @@ function table_link($id, $type = "edit"){
                 <button type="button" id="copy" class="btn btn-sm btn-outline-primary" data-parent=".card" data-target="#api_token" data-tooltip="Копировать"><i class="bi-clipboard"></i></button>
             </p>
             <p class="card-text">
-                <?=$row['description']?>
+                <?=nl2br($row['description'])?>
             </p>
             <a href="<?=table_link($row['id'])?>" class="card-link">Редактировать</a>
             <a class="card-link link-danger c-pointer" data-bs-toggle="modal" data-bs-target="#modal_delete" data-row-name="<?=$row['name']?>" data-row-id="<?=$row['id']?>">Удалить</a>

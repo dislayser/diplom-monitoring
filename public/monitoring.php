@@ -21,14 +21,16 @@ require(DIR.'app/Controllers/Auth.php');
             <button class="btn btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#control_panel" aria-controls="offcanvasScrolling"><i class="bi-list"></i></button>
         </div>
         <div id="visual">
-            <img src="assets/img/data/monitoring/1.png" alt="" id="map">
+            <img src="assets/img/data/monitoring/1.png" class="map" alt="" id="map">
         </div>
-        <!-- Добавьте другие маркеры здесь -->
     </div>
 
     <?php include(DIR . 'app/Views/ThemeButton.php');?>
 
     <script src="<?=BASE_URL?>assets/js/visual.data.js"></script>
+    <script>
+        
+    </script>
 </body>
 
 </html>

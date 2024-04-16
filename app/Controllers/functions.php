@@ -112,4 +112,11 @@ function format_date($val){
 
     return $formatted;
 }
+
+// Возвращаем данные в формате JSON
+function output($data, $status = 200){
+    http_response_code((int)$status);
+    echo json_encode($data);
+    exit;
+}
 ?>

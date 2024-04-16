@@ -40,6 +40,9 @@ require(DIR.'app/Controllers/Admin.php');
     <?php include(DIR . 'app/Views/ThemeButton.php');?>
 
     <?php include(DIR . 'app/Views/Footer.php');?>
+    
+    <script src="<?=BASE_URL?>assets/js/ajax.func.js"></script>
+    <script src="<?=BASE_URL?>assets/js/ajax.gen_token.js"></script>
     <script src="<?=BASE_URL?>assets/js/admin-table-titel.js"></script>
     <script src="<?=BASE_URL?>assets/js/table_links.js"></script>
     <script src="<?=BASE_URL?>assets/js/mark_search.js"></script>

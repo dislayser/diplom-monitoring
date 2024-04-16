@@ -55,6 +55,27 @@ function input($item){
     
     }
 
+    //Для тем
+    if($item['Field'] == 'theme'){
+        $select.= ' name="'.$item['Field'].'" id="'.$item['Field'].'">';
+        $select.= '<option value="">classic</option>';
+
+        $themes_dir = DIR.'public/assets/css/themes';
+        $themes_dir_files = scandir($themes_dir);
+
+        $themes = array_filter($themes_dir_files, function($item) use ($themes_dir) {
+            return is_dir($themes_dir . '/' . $item) && !in_array($item, ['.', '..']);
+        });
+
+        foreach ($themes as $theme){
+            $selected = '';
+            if (isset($form_data[$item['Field']]) && $theme == $form_data[$item['Field']]) {
+                $selected .= 'selected';
+            } 
+            $select.= '<option value="'.$theme.'" '.$selected.'>'.$theme.'</option>';
+        }
+    }
+
     //Список для полей статус
     if ($item['Field'] == 'id_status'){
         $select.= ' name="'.$item['Field'].'" id="'.$item['Field'].'">';
@@ -100,8 +121,16 @@ function input($item){
     $label .= '</label>';
     $input .= '>';
     $select.= '</select>';
+
+    if($item['Type'] == 'text'){
+        $value = '';
+        if(isset($form_data[$item['Field']])){
+            $value .= $form_data[$item['Field']];
+        }
+        $input = '<textarea class="form-control" name="'.$item['Field'].'" id="'.$item['Field'].'" rows="3">'.$value.'</textarea>';
+    }
     
-    if ($item['Field'] == 'id_status' || $item['Field'] == 'id_rule' || $item['Field'] == 'id_user' ){
+    if ($item['Field'] == 'id_status' || $item['Field'] == 'id_rule' || $item['Field'] == 'id_user' || $item['Field'] == 'theme'){
         return $label.$select;
     }
 
