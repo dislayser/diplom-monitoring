@@ -5,6 +5,7 @@ $sidebar_items = array(
     ['devices', 'Устройства', 'controller'],
     ['device_statuses', 'Статусы устройства', 'question'],
     ['user_rules', 'Права пользователей', 'award'],
+    ['gas_data', 'Данные о газах', 'clipboard-data'],
     ['errors', 'Ошибки', 'bug'],
     
 );

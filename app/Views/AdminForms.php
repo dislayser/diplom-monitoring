@@ -146,7 +146,7 @@ function get_cancel_link(){
     return $link;
 }
 ?>
-
+<!-- Форма AdminForms.php -->
 <form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="my-3">
     <div class="h4 d-flex my-3">
         <?php

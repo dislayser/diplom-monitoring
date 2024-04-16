@@ -1,5 +1,11 @@
 //import { show_toast, toast_block } from './toast.js';
 $(document).ready(function() {
+    //Параметры токена
+    const token_params = {
+        'length' : 32
+    };
+
+    //Если есть поле с вводом API 
     if ($('label[for="api_token"]').length) {
         // Создаем блок div с классом "d-flex gap-2"
         var container = $('<div class="d-flex gap-2"></div>');
@@ -20,7 +26,7 @@ $(document).ready(function() {
     $(document).on('click', '#new_token', function(){
         var api_input = $('#api_token');
 
-        getOne('get', {'length' : 32}, 'json', BASE_URL + 'ajax/GenApi', function(data){
+        getOne('get', token_params, 'json', BASE_URL + 'ajax/GenApi', function(data){
             var api_input = $('#api_token');
             api_input.val(data.api_token)
         });

@@ -119,4 +119,10 @@ function output($data, $status = 200){
     echo json_encode($data);
     exit;
 }
+
+//Получить DATETIME
+function now(){
+    $date = new DateTime();
+    return $date->format('Y-m-d H:i:s');
+}
 ?>

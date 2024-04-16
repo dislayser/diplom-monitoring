@@ -7,17 +7,22 @@ require(DIR.'app/Controllers/functions.php');
 // Для вывода данных в JSON
 header('Content-Type: application/json');
 
-//GET запросы для получения данных о профиле
+//GET
 if($_SERVER['REQUEST_METHOD'] === 'GET'){
     $length = 32;
-    if($_GET['length'] && is_numeric($_GET['length'])){
+    if(isset($_GET['length']) && is_numeric($_GET['length']) && (int)$_GET['length'] > 0){
         $length = (int)$_GET['length'];
+    }
+
+    //Ограничение на колличество символов
+    if ($length > 255) {
+        output(['error_desc' => 'length value must not exceed 255 characters']);
     }
     $api_token = ['api_token' => gen_api($length)];
     output($api_token);
 }
 
-//Генератор
+//Генератор API токена
 function gen_api($length = 32) {
     // Символы, из которых будет состоять токен
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';

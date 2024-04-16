@@ -1,10 +1,9 @@
-$(document).ready(function(){
-    
-    let profile_toasts = new Toast({
+$(document).ready(function(){ 
+    toasts = new Toast({
         logo: SITE_LOGO,
         site: SITE_NAME_HTML,
         time: 'Только что',
-        msg: 'Данные сохранены.'
+        msg: ''
     });
 
     //Получение данных профиля
@@ -26,13 +25,12 @@ $(document).ready(function(){
 
         put('post', form_data, $(this).attr('action'), function(data){
             if(data.status == 200){
-                profile_toasts.params.msg = 'Данные сохранены.';
+                toasts.params.msg = 'Данные сохранены.';
             }else{
-                profile_toasts.params.msg = 'Ошибка запроса.';
+                toasts.params.msg = 'Ошибка выполнения запроса.';
             }
-            console.log(e);
             $('form').find(":submit[name='" + e.originalEvent.submitter.name + "']").prop('disabled', false);
-            profile_toasts.create();
+            toasts.create();
         });
     });
 });

@@ -1,5 +1,13 @@
 //import { show_toast, toast_block } from './toast.js';
+
 $(document).ready(function() {
+    //Создание обьекта тоаст
+    let toasts = new Toast({
+        logo: SITE_LOGO,
+        site: SITE_NAME_HTML,
+        time: 'Только что',
+        msg: ''
+    });
 
     //Динамичное изменение темы
     $('#theme').change(function(){
@@ -8,18 +16,10 @@ $(document).ready(function() {
         if (selected_theme){
             new_css = '/themes/' + selected_theme;
         }
-        new_css = BASE_URL + 'assets/css' + new_css + '/bootstrap.min.css'
-        console.log(selected_theme);
+        new_css = BASE_URL + 'assets/css' + new_css + '/bootstrap.min.css';
         $('link#main_css').attr('href', new_css);
     });
 
-    //Создание обьекта тоаст
-    var toasts = new Toast({
-        logo: SITE_LOGO,
-        site: SITE_NAME_HTML,
-        time: 'Только что',
-        msg: 'Скопировано.'
-    });
 
     //Для копирования
     $(document).on('click', '#copy[data-target]', function(){
@@ -29,6 +29,7 @@ $(document).ready(function() {
         
         block.select();
         if (document.execCommand("copy")){
+            toasts.params.msg = 'Скопировано.';
             toasts.create();
         };
     });
