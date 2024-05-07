@@ -12,6 +12,7 @@ define('LOGIN_URL',             BASE_URL . 'login');
 define('LOGOUT_URL',            BASE_URL . 'logout');
 define('ADMIN_URL',             BASE_URL . 'admin/');
 
+define('API_URL',               BASE_URL . 'api/');
 define('AJAX_PROFILE_URL',      BASE_URL . 'ajax/Profile');
 define('IMG_MONITORING',        BASE_URL . 'assets/img/data/monitoring/');
 

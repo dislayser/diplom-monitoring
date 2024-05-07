@@ -43,7 +43,7 @@ require(DIR.'app/Controllers/Login.php');
                             <input type="password" value="<?=$form_data['password']?>" pattern="[a-zA-Z0-9!@#$%^&*()_+-=]+" class="form-control" id="password" name="password" placeholder="Пароль" aria-label="Password" required>
                             <label for="password">Пароль</label>
                         </div>
-                        <span class="input-group-text"><i id="toggle-password-icon" class="bi bi-eye"></i></span>
+                        <span class="input-group-text"><i id="toggle-password-icon" data-target="#password" class="bi bi-eye"></i></span>
                     </div>
                     <div id="error" class="form-text text-danger"><?=$errMsg?></div>
                     

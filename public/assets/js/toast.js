@@ -11,7 +11,7 @@ class Toast {
 
     create(){
         var $toast = $(`
-            <div class="toast fade show">
+            <div class="toast fade show" style="display:none;">
                 <div class="toast-header">
                     <div class="bd-placeholder-img rounded me-2 d-flex justify-content-center align-items-center text-warning" style="background: var(--bs-primary);width: 20px; height: 20px;">
                         ${this.params.logo}
@@ -51,6 +51,7 @@ class Toast {
         });
 
         this.Placement.append($toast);
+        $toast.show('fast');
 
     }
 

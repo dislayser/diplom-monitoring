@@ -46,7 +46,7 @@
     cursor: pointer;
 }
 
-#gradation{
+.rainbow-gradation{
     background: linear-gradient(to right, var(--bs-success) 0%, var(--bs-warning) 50%, var(--bs-danger) 100%);
     height:1.5rem;
 }

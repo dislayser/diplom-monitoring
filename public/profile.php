@@ -15,7 +15,7 @@ require(DIR.'app/Controllers/Auth.php');
     <?php include(DIR . 'app/Views/Header.php');?>
 
     <main>
-        <div class="container-lg col-lg-7">
+        <div class="container-lg col-lg-5">
             <?php include(DIR . 'app/Views/ProfileForm.php');?>
         </div>
     </main>
@@ -23,6 +23,7 @@ require(DIR.'app/Controllers/Auth.php');
     <?php include(DIR . 'app/Views/ThemeButton.php');?>
 
     <?php include(DIR . 'app/Views/Footer.php');?>
+    <script src="<?=BASE_URL?>assets/js/hide_password.js"></script>
     <script src="<?=BASE_URL?>assets/js/ajax.func.js"></script>
     <script src="<?=BASE_URL?>assets/js/ajax.profile.js"></script>
 </body>

@@ -96,7 +96,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-login'])){
                     // Установка куки с идентификатором сессии
                     $session_id = session_id();
                     $ip = $_SERVER['REMOTE_ADDR'];
-                    setcookie('session_id', $session_id, time() + 60 * 60 * 24 * 30, '/', null, 0, 1);
+                    setcookie('session_id', $session_id, time() + 60 * 60 * 24 * 30, BASE_URL, null, 0, 1);
                     $DB->update('users', $userdata['id'], ['session_id' => $session_id, 'ip' => $ip]);
                 }
 

@@ -12,6 +12,10 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
     $length = 32;
     if(isset($_GET['length']) && is_numeric($_GET['length']) && (int)$_GET['length'] > 0){
         $length = (int)$_GET['length'];
+        
+        $length_min = 1;
+        $length_max = 255;
+        $length = min(max($length_min, $length), $length_max);
     }
 
     //Ограничение на колличество символов
@@ -25,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
 //Генератор API токена
 function gen_api($length = 32) {
     // Символы, из которых будет состоять токен
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
+    $characters = getChars();
     $token = '';
 
     // Генерируем случайный токен
@@ -34,5 +38,18 @@ function gen_api($length = 32) {
     }
 
     return $token;
+}
+
+function getChars(){
+    $characters = [
+        "numbers" => '0123456789',
+        "lowercase" => 'abcdefghijklmnopqrstuvwxyz',
+        "uppercase" => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+        "chars" => '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
+    ];
+    $characters = array_values($characters);
+    $characters = implode($characters);
+
+    return $characters;
 }
 ?>

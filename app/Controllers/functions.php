@@ -90,6 +90,9 @@ function ren_col($index){
         'data' => 'Данные',
         'date' => 'Дата',
         'map_file' => 'Файл карты',
+
+        'sector_x' => 'Ширина сектора',
+        'sector_y' => 'Высота сектора',
     );
 
     if (isset($cols[$index])){
@@ -158,5 +161,14 @@ function table_structure($arr){
         }
     }
     return $result;
+}
+
+//Работа с куки
+function set_Cookie($name, $val = null, $time = 60 * 60 * 24 * 30){
+    setcookie($name, $val, time() + $time, BASE_URL);
+}
+function get_Cookie($name){
+    if (isset($_COOKIE[$name])) return $_COOKIE[$name];
+    return null;
 }
 ?>

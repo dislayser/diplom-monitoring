@@ -1,18 +1,19 @@
 $(document).ready(function () {
     var errMsg = $('#error');
-    const passwordInput = $("#password");
-    const icon = $("#toggle-password-icon");
+    const icon = $("i#toggle-password-icon");
 
-    $("#toggle-password-icon").click(function () {
+    icon.click(function () {
+        
+        let passwordInput = $($(this).data("target"));
         if (passwordInput.attr("type") === "password") {
             passwordInput.attr("type", "text");
-            icon.fadeOut(10, function () {
-                icon.removeClass("bi-eye").addClass("bi-eye-slash").fadeIn(200);
+            $(this).fadeOut(10, function () {
+                $(this).removeClass("bi-eye").addClass("bi-eye-slash").fadeIn(200);
             });
         } else {
             passwordInput.attr("type", "password");
-            icon.fadeOut(10, function () {
-                icon.removeClass("bi-eye-slash").addClass("bi-eye").fadeIn(200);
+            $(this).fadeOut(10, function () {
+                $(this).removeClass("bi-eye-slash").addClass("bi-eye").fadeIn(200);
             });
         }
     });

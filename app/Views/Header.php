@@ -3,7 +3,7 @@
 
 
 <!-- HEADER -->
-<header class="container-fluid shadow bg-primary">
+<header class="container-fluid shadow bg-primary z-2">
 
     <div class="container">
         <nav class="navbar navbar-expand-lg" data-bs-theme="dark">

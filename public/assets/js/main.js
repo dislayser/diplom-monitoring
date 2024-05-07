@@ -45,3 +45,10 @@ function getCookie(name) {
 function setCookie(name, val){
     document.cookie = name +"=" + val + "; expires=" + new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString() + "; path=/";
 }
+    
+//Переход на другую страницу
+function go(url = BASE_URL){
+    if (url !== window.location.href) {
+        window.location.href = url;
+    }
+}

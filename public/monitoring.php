@@ -14,18 +14,27 @@ require(DIR.'app/Controllers/Auth.php');
 
 <body class="d-flex flex-column h-100">
     <?php include(DIR . 'app/Views/UI.php');?>
-    <?php include(DIR . 'app/Views/Header.php');?>
-    
     <?php include(DIR . 'app/Views/ControlPanel.php');?>
     
-    <div class="overflow-x-auto overflow-auto position-relative">
+    <?php include(DIR . 'app/Views/Header.php');?>
+    
+    <div class="overflow-x-auto overflow-auto position-relative" style="overflow: hidden!important;">
         <!-- Кнопка меню -->
-        <div class="z-3 position-fixed start-0 ms-3 mt-3">
+        <div class="z-3 position-fixed start-0 ms-3 mt-3" >
             <button class="btn btn-primary opacity-75" data-bs-toggle="offcanvas" data-bs-target="#control_panel" aria-controls="offcanvasScrolling"><i class="bi-list"></i></button>
+        </div>
+        
+        <!-- Кнопки зума -->
+        <div class="z-3 position-fixed end-0 me-3 mt-3">
+            <div class="btn-group opacity-75" role="group" aria-label="Масштабирование">
+                <button type="button" id="zoom-in"  class="btn btn-primary"><i class="bi-plus"></i></button>
+                <button type="button" id="zoom-out" class="btn btn-primary"><i class="bi-dash"></i></button>
+            </div>
         </div>
 
         <!-- Визуализация данных -->
-        <div id="visual">
+        <!-- z-n1 position-fixed -->
+        <div class="z-1 " id="visual" style="position: relative; transform: scale(0.6); left: -46px; top: -58px; transform-origin: 361.92px 229.97px;">
             <img src="" class="map" alt="" id="map">
         </div>
     </div>
@@ -34,6 +43,7 @@ require(DIR.'app/Controllers/Auth.php');
 
     <script src="<?=BASE_URL?>assets/js/ajax.func.js"></script>
     <script src="<?=BASE_URL?>assets/js/visual.data.js"></script>
+    <script src="<?=BASE_URL?>assets/js/visual.nav.js"></script>
 </body>
 
 </html>

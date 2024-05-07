@@ -37,6 +37,7 @@ require(DIR.'app/Controllers/Admin.php');
 
         </div>
     </main>
+    
     <?php include(DIR . 'app/Views/ThemeButton.php');?>
 
     <?php include(DIR . 'app/Views/Footer.php');?>

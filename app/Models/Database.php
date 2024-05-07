@@ -33,10 +33,8 @@ class Database {
 
     //Конструктор класса
     public function __construct($db_name, $db_user, $db_pass,
-                                $limit = 25, $cur_page = 1, $offset = 0, $orderBy = 'DESC', $sortCol = 'id', 
-                                $driver = "mysql", $host = "localhost",
-                                $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                                            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]) {
+        $limit = 25, $cur_page = 1, $offset = 0, $orderBy = 'DESC', $sortCol = 'id', $driver = "mysql", $host = "localhost",
+        $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]) {
         //Авторизационные данные
         $this->db_name = $db_name;
         $this->db_user = $db_user;
@@ -69,8 +67,22 @@ class Database {
         return $this->conn;
     }
 
+    //Получение оффсета
     private function getOffset(){
+        $this->cur_page = (int)$this->cur_page;
         $this->offset = $this->limit * ($this->cur_page - 1);
+        return $this;
+    }
+    //Получение лимита строк
+    private function getLimit(){
+        $this->limit = (int)$this->limit;
+
+        //Задаем ограничения для LIMIT например от 1 до 100
+        $limit_min = 1;
+        $limit_max = 100;
+
+        $this->limit = min(max($limit_min, $this->limit), $limit_max);
+        return $this;
     }
     
     //возвращает строку с отбором WHERE - без параметров
@@ -185,6 +197,7 @@ class Database {
         $sql .= $this->where($params);
 
         $this->getOffset();
+        $this->getLimit();
 
         $sql .= " ORDER BY $this->sortCol $this->orderBy";
         $sql .= " LIMIT $this->limit OFFSET $this->offset";
@@ -258,7 +271,8 @@ class Database {
         }
     }
 
-    function sql_request_select($sql, $params = []){
+    //Просто запрос в бд на получение данных
+    public function sql_request_select($sql, $params = []){
         try{
             $query = $this->conn->prepare($sql);
             $query->execute(array_values($params));
@@ -280,6 +294,7 @@ class Database {
             echo '</pre>';
         }
     }
+
     //Для записи ошибок - возможно стоит сделать это за классом
     private function error_log($error, $params_data = []){
         print_r($error);
