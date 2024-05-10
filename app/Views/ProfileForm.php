@@ -45,7 +45,7 @@
         </div>
 
         <div class="d-flex text-body-secondary">
-            <small class="ms-auto"><b>ID пользователя: <?=$_SESSION['id']?></b></small>
+            <small class="ms-auto"><b>ID пользователя: <span id="id"><?=$_SESSION['id']?></span></b></small>
         </div>
     </div>
     <?=fieldToken()?>

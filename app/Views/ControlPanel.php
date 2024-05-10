@@ -70,7 +70,7 @@
                 </select>
             </div>
 
-            <div>
+            <!--div>
                 <label class="form-label">Размер сектора</label>
                 <div class="btn-group w-100" role="group" aria-label="Размер сектора">
                     <input type="radio" class="btn-check" name="sector_size" value="1" id="sector_size-x1">
@@ -82,7 +82,7 @@
                     <input type="radio" class="btn-check" name="sector_size" value="3" id="sector_size-x3">
                     <label class="btn btn-outline-secondary" for="sector_size-x3">x3</label>
                 </div>
-            </div>
+            </div-->
 
             <div>
                 <input type="checkbox" class="form-check-input" value="1" id="set_mesh">

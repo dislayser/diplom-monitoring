@@ -13,7 +13,6 @@ if (isset($_GET['table']) && !empty($_GET['table'])){
 }
 
 
-
 //Создание записи
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])){
     unset($_POST['add']);

@@ -48,7 +48,7 @@ function input($item){
             }
         }
 
-        if (($item['Null'] == 'NO' && $item['Field'] != 'password') || $_GET['type'] == 'add') {
+        if ($item['Null'] == 'NO' && ($item['Field'] != 'password' || $_GET['type'] == 'add')) {
             $label .= $red_star;
             $input .= ' required';
         }
@@ -122,7 +122,7 @@ function input($item){
     $input .= '>';
     $select.= '</select>';
 
-    if($item['Type'] == 'text'){
+    if($item['Type'] == 'text' || $item['Type'] == 'longtext'){
         $value = '';
         if(isset($form_data[$item['Field']])){
             $value .= $form_data[$item['Field']];

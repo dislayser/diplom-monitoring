@@ -8,6 +8,8 @@ ToDo/
 info/
 install/
 public/assets/css/themes
+__pycache__/
 
 # TEST
 public/access.log
+config.py
