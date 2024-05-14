@@ -1,3 +1,5 @@
+let DB_GAS = [];
+function device_change(){};
 $(document).ready(function() {
 	// HTML OBJ
 	const VISUAL = $('#visual');
@@ -13,7 +15,6 @@ $(document).ready(function() {
 
 
 	// GLOBAL DATA
-	let DB_GAS = [];
 	let DB_TYPES = [];
 	let DB_TYPES_ITEM = [];
 	let DB_DEVICE = [];
@@ -66,6 +67,7 @@ $(document).ready(function() {
 		getOne('get', {'id':SELECT_DEVICE.val()}, 'json', BASE_URL + 'api/get/gasData', function(data){
 			if (data.data != undefined){
 				DB_GAS = data;
+				console.log(DB_GAS);
 				gas_options(data.data);
 				IMG_MAP.attr('src', BASE_URL + "assets/img/data/monitoring/" + DB_GAS.map_file).on('load', function() {
 					map.width = IMG_MAP.width();
@@ -126,6 +128,10 @@ $(document).ready(function() {
 	BTN_SAVE.click(function(){
 		checkbox_mesh_change();
 		update();
+	});
+
+	$(document).on("click", "#toast_update_btn", function(){
+		device_change();
 	});
 
 	//Обновление 

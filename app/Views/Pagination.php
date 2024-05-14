@@ -31,7 +31,7 @@ if ($totalPages > 1) {
 
     echo '<hr>';
 
-    echo '<nav>';
+    echo '<nav id="pagination">';
 
     echo '<ul class="pagination">';
     if ($currentPage > 1) {

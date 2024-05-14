@@ -43,6 +43,7 @@ require(DIR.'app/Controllers/Auth.php');
 
     <script src="<?=BASE_URL?>assets/js/ajax.func.js"></script>
     <script src="<?=BASE_URL?>assets/js/visual.data.js"></script>
+    <script src="<?=BASE_URL?>assets/js/visual.data.new.js"></script>
     <script src="<?=BASE_URL?>assets/js/visual.nav.js"></script>
 </body>
 

@@ -71,6 +71,7 @@ function ren_col($index){
         'id_device' => 'Устройство',
         'login' => 'Логин',
         'last_auth' => 'Онлайн',
+        'theme' => 'Тема стилей',
         'api_token' => 'API Токен',
         'zone' => 'Местоположение',
         'num_start' => 'Старт',

@@ -11,6 +11,9 @@ define('SITE_NAME_HTML', 'Gas<b><span class="text-warning">Track</span></b>');
 define('SITE_LOGO_SVG_NAME', 'display');
 define('SITE_LOGO', '<i class="bi-'.SITE_LOGO_SVG_NAME.'"></i>');
 
+//Версия программы
+define('APP_VERSION', '1.0');
+
 //Ссылки в навигационной панели
 $main_links = array(
     '/monitoring.php' => ['Мониторинг', MONITORING_URL],

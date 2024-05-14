@@ -1,5 +1,24 @@
 
 <?php
+function get_class_parent($item){
+    $class = "col-12";
+
+    $col_6 = ["sector_x", "sector_y", "id_device", "ip", "date", "created", "name", "id_status", "status", "id_rule", "session_id"];
+    if (in_array($item['Field'], $col_6)) {
+        $class = "col-6";
+    }
+
+    $col_3 = ["num_start", "num_end"];
+    if (in_array($item['Field'], $col_3)) {
+        $class = "col-3";
+    }
+
+    if ($item['Field'] == 'api_token') {
+        $class .= " font-monospace";
+    }
+    return $class;
+}
+
 function input($item){
     global $red_star;
     global $form_data;
@@ -29,8 +48,11 @@ function input($item){
                 case 'varchar(32)':
                     $input .= ' type="text" maxlength="32"';
                     break;
-                case 'int':
+                case 'int(11)':
                     $input .= ' type="number" step="1"';
+                    break;
+                case 'datetime':
+                    $input .= ' type="datetime-local"';
                     break;
                 default:
                     break;
@@ -99,6 +121,17 @@ function input($item){
             $select.= '<option value="'.$rule['id'].'" '.$selected.'>'.$rule['rule'].'</option>';
         }
     }
+    if ($item['Field'] == 'id_device'){
+        $select.= ' name="'.$item['Field'].'" id="'.$item['Field'].'">';
+        $devices = $DB->select('devices')->data;
+        foreach ($devices as $device){
+            $selected = '';
+            if (isset($form_data['id_device']) && $device['id'] == $form_data['id_device']) {
+                $selected .= 'selected';
+            } 
+            $select.= '<option value="'.$device['id'].'" '.$selected.'>'.$device['name'].'</option>';
+        }
+    }
     if ($item['Field'] == 'id_user'){
         $select.= ' name="'.$item['Field'].'" id="'.$item['Field'].'">';
         $users = $DB->select('users')->data;
@@ -130,7 +163,7 @@ function input($item){
         $input = '<textarea class="form-control" name="'.$item['Field'].'" id="'.$item['Field'].'" rows="3">'.$value.'</textarea>';
     }
     
-    if ($item['Field'] == 'id_status' || $item['Field'] == 'id_rule' || $item['Field'] == 'id_user' || $item['Field'] == 'theme'){
+    if ($item['Field'] == 'id_status' || $item['Field'] == 'id_rule' || $item['Field'] == 'id_user' || $item['Field'] == 'theme' || $item['Field'] == 'id_device'){
         return $label.$select;
     }
 
@@ -144,6 +177,9 @@ function get_cancel_link(){
         $link = '?table=' .  $_GET['table'];
     }
     return $link;
+}
+function get_edit_url(){
+    return $_SERVER['REQUEST_URI'];
 }
 ?>
 <!-- Форма AdminForms.php -->
@@ -162,7 +198,7 @@ function get_cancel_link(){
     <div class="row g-3">
         <?php foreach($table_structure as $input):?>
             <?php if($input['Field'] != 'id' && $input['Field'] != 'created' && $input['Field'] != 'last_auth'):?>
-            <div class="col-12">
+            <div class="<?=get_class_parent($input)?>">
                 <?=input($input)?>
             </div>
             <?php endif;?>
@@ -171,11 +207,11 @@ function get_cancel_link(){
         <!-- Кнопки -->
         <hr>
         <div class="d-flex gap-3 flex-row-reverse">
-            
             <button type="submit" class="btn btn-primary" name="<?=$_GET['type']?>">Сохранить</button>
             <a class="btn btn-secondary" href="<?=get_cancel_link()?>">Отмена</a>
             <?php if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 echo '<button type="submit" class="btn btn-danger" name="delete">Удалить</button>';
             }; ?>
+            <a class="btn btn-link text-decoration-none" href="<?=get_edit_url()?>" id="go-edit" style="display: none;">Редактировать</a>
         </div>
 </form>

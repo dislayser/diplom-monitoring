@@ -94,6 +94,6 @@
     <!-- Sidebar footer -->
     <div  class="px-3 pb-3">
         <hr>
-        <button type="button" class="btn btn-success w-100" id="cp_save" data-bs-dismiss="offcanvas" aria-label="Сохранить"><span class="spinner-border spinner-border-sm me-2" aria-hidden="true" style="display:none;"></span>Сохранить</button>
+        <button type="button" class="btn btn-success w-100" id="cp_save" data-bs-dismiss="offcanvas" aria-label="Сохранить"><span class="spinner-border spinner-border-sm me-2" aria-hidden="true" style="display:none;"></span>Обновить</button>
     </div>
 </div>

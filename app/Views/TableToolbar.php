@@ -1,5 +1,5 @@
 <?php if(!empty($table_name) && in_array($table_name, $tables_allowed)):?>
-<div class="d-flex gap-2">
+<div class="d-flex align-items-center gap-2">
     <div class="me-auto">
         <?php
             $a_href = '?';

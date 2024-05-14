@@ -1,10 +1,4 @@
 $(document).ready(function(){ 
-    toasts = new Toast({
-        logo: SITE_LOGO,
-        site: SITE_NAME_HTML,
-        time: 'Только что',
-        msg: ''
-    });
 
     //Получение данных профиля
     getOne('get', [], 'json', $('form').attr('action'), function(data){

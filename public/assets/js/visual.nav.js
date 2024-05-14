@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	const VISUAL = $('#visual');
 	// Настройка масштабирования
-	var scale = parseFloat(VISUAL.css("transform").split("(")[1].split(")")[0]);
+	let scale = parseFloat(VISUAL.css("transform").split("(")[1].split(")")[0]);
 	var minScale = 0.2;
 	var maxScale = 3;
 	var step = 0.1;
@@ -67,5 +67,64 @@ $(document).ready(function() {
 			zoom_to_point(mouseX, mouseY, 'in');
 		}
 	});
-	
+
+	//Навигация для мобильных устройств
+	if (isMobile) {
+		mobile_draggable();
+	}
+	function mobile_draggable(){
+		
+        let startX;
+        let startY;
+        let isDragging = false;
+
+        
+        let v_left, v_top; 
+
+
+        const VISUAL = $('#visual');
+
+        VISUAL.on('touchstart mousedown', function(event) {
+            if (event.type === 'mousedown') {
+                isDragging = true;
+            } else {
+                startX = event.originalEvent.touches[0].clientX;
+                startY = event.originalEvent.touches[0].clientY;
+                
+                v_left = parseInt(VISUAL.css("left"));
+                v_top = parseInt(VISUAL.css("top"));
+            }
+        });
+
+        VISUAL.on('touchmove mousemove', function(event) {
+            event.preventDefault(); // предотвращаем прокрутку страницы при свайпе
+
+            if (isDragging) {
+                return; // если уже перетаскиваем элемент, не обрабатываем свайпы
+            }
+
+            let currentX, currentY;
+
+            if (event.type === 'mousemove') {
+                currentX = event.clientX;
+                currentY = event.clientY;
+            } else {
+                currentX = event.originalEvent.touches[0].clientX;
+                currentY = event.originalEvent.touches[0].clientY;
+            }
+
+            let deltaX = currentX - startX;
+            let deltaY = currentY - startY;
+
+            console.log(deltaX, deltaY);
+            
+            VISUAL.css('left', (v_left + (deltaX)) + "px");
+            VISUAL.css('top',  (v_top  + (deltaY)) + "px");
+        });
+
+        $(document).on('mouseup touchend', function() {
+            isDragging = false;
+        });
+	}
+
 });

@@ -1,8 +1,8 @@
 //import { show_toast, toast_block } from './toast.js';
-
+//Создание обьекта тоаст
+let toasts;
 $(document).ready(function() {
-    //Создание обьекта тоаст
-    let toasts = new Toast({
+    toasts = new Toast({
         logo: SITE_LOGO,
         site: SITE_NAME_HTML,
         time: 'Только что',
@@ -34,6 +34,13 @@ $(document).ready(function() {
         };
     });
 
+
+    if (window.location.hash === '#view') {
+        // Находим все поля ввода на странице и делаем их неактивными
+        $('input, select, textarea').prop('disabled', true);
+        $('button:submit').hide();
+        $('a#go-edit').show();
+    }
 });
 
 // Функция для получения значения куки по имени
@@ -41,6 +48,7 @@ function getCookie(name) {
     const cookieValue = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
     return cookieValue ? cookieValue[2] : null;
 }
+
 // Функция для записи значения куки
 function setCookie(name, val){
     document.cookie = name +"=" + val + "; expires=" + new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString() + "; path=/";
@@ -52,3 +60,5 @@ function go(url = BASE_URL){
         window.location.href = url;
     }
 }
+
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);

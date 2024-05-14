@@ -7,6 +7,8 @@ class Toast {
         this.params = params;
         this.Placement = $('#toast_placement');
         this.Toasts = [];
+
+        this.update_time = 5000;
     }
 
     create(){
@@ -27,7 +29,7 @@ class Toast {
 
         //Подстановка текста
         $toast.find('strong').html(this.params.site);
-        $toast.find('.toast-body').text(this.params.msg);
+        $toast.find('.toast-body').html(this.params.msg);
         // Добавляем элемент времени в тост
         const $timeElement = $toast.find('small');
         $timeElement.html(this.params.time);
@@ -42,7 +44,7 @@ class Toast {
         // Обновляем время каждую секунду
         const updateInterval = setInterval(() => {
             $timeElement.html(this.getTimeAgo(created_time));
-        }, 1000);
+        }, this.update_time);
 
         // Добавляем обработчик события для кнопки закрытия
         $toast.find('.btn-close').on('click', () => {
@@ -74,7 +76,7 @@ class Toast {
         const elapsed = currentTime - pastTime;
         const seconds = Math.floor(elapsed / 1000);
         if (seconds < 60) {
-            return 'Tолько что';
+            return `${seconds} ${this.pluralize(seconds, 'секунду', 'секунды', 'секунд')} назад`;
         }
         const minutes = Math.floor(seconds / 60);
         if (minutes < 60) {

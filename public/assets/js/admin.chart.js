@@ -44,7 +44,8 @@ $(document).ready(function() {
 
     //градиент
     ctx_gasdata = ctx_gasdata.getContext('2d');
-    var gradient = ctx_gasdata.createLinearGradient(0, 0, 0, 600);
+    var gradient = ctx_gasdata.createLinearGradient(0, 0, 0, isMobile ? 80 : 500);
+
     gradient.addColorStop(0, '#007bffaa');
     gradient.addColorStop(1, 'transparent');
 
@@ -97,4 +98,17 @@ $(document).ready(function() {
         options
     });
     
+    // Обработчик события изменения размера холста
+    $(window).on('resize', function() {upd_ctx()});
+    function upd_ctx(){
+        var gradient = ctx_gasdata.createLinearGradient(0, 0, 0, $("#chart_gasdata").height());
+        gradient.addColorStop(0, '#007bffaa');
+        gradient.addColorStop(1, 'transparent');
+        
+        // Применяем градиент к фону графика
+        chart_gasdata.data.datasets.forEach(function(dataset) {
+            dataset.backgroundColor = gradient;
+        });
+        chart_gasdata.update();
+    }
 });
