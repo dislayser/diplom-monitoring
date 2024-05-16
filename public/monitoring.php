@@ -34,7 +34,7 @@ require(DIR.'app/Controllers/Auth.php');
 
         <!-- Визуализация данных -->
         <!-- z-n1 position-fixed -->
-        <div class="z-1 " id="visual" style="position: relative; transform: scale(0.6); left: -46px; top: -58px; transform-origin: 361.92px 229.97px;">
+        <div class="z-1 transition-transform user-select-none" id="visual" style="position: relative; transform: scale(0.6); left: 0; top: 0; transform-origin: 361.92px 229.97px;">
             <img src="" class="map" alt="" id="map">
         </div>
     </div>

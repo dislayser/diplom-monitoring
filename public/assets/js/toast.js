@@ -47,6 +47,10 @@ class Toast {
         }, this.update_time);
 
         // Добавляем обработчик события для кнопки закрытия
+        $toast.find(".remove-toast").on('click', () => {
+            clearInterval(updateInterval); // Останавливаем обновление времени при закрытии тоста
+            this.removeToast($toast);
+        });
         $toast.find('.btn-close').on('click', () => {
             clearInterval(updateInterval); // Останавливаем обновление времени при закрытии тоста
             this.removeToast($toast);

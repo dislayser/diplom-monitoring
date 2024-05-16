@@ -9,11 +9,14 @@ import noise
 URL = config.api_url + config.api_url_path
 
 def rand_num(min_value, max_value):
-    return round(random.uniform(min_value, max_value), 2)
+    min_value = min_value * 10
+    max_value = max_value * 10
+    return random.uniform(min_value, max_value) / 10
 
 def rand_data(matrix_data):
     # Инициализация пустой матрицы данных
     data = {}
+    lacunarity = rand_num(2, 2.5)
 
     # Проходим по всем столбцам матрицы
     for i in range(matrix_data['x']):
@@ -34,7 +37,7 @@ def rand_data(matrix_data):
             for key, radius, initial_value in matrix_data['keys']:
                 # Генерация шума Перлина в диапазоне от -1 до 1
                 # Можно менять занчение lacunarity для небольшой рандомизации
-                perlin_noise = noise.pnoise2(i * 0.1, j * 0.1, octaves=1, persistence=64, lacunarity=10, repeatx=1024, repeaty=1024, base=len(key))
+                perlin_noise = noise.pnoise2(i * 0.025, j * 0.025, octaves=2, persistence=65, lacunarity=lacunarity, repeatx=1024, repeaty=1024, base=len(key))
                 # Масштабируем шум в заданный диапазон
                 value = initial_value + radius * perlin_noise
                 # Округление до двух знаков после запятой
@@ -46,8 +49,8 @@ def rand_data(matrix_data):
 
 # Параметры для генерации данных
 matrix_params = {
-    'x': 19,
-    'y': 9,
+    'x': 38,
+    'y': 18,
     'keys': [
         ['Temp', 7, 20],
         ['SO2', 10, 22],

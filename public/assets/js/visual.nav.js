@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	const VISUAL = $('#visual');
+	const MAP = $("#map");
 	// Настройка масштабирования
 	let scale = parseFloat(VISUAL.css("transform").split("(")[1].split(")")[0]);
 	var minScale = 0.2;
@@ -31,8 +32,8 @@ $(document).ready(function() {
 		}
 
 		// Определяем новые координаты для смещения элемента
-		var offsetX = (pointX - VISUAL.offset().left);
-		var offsetY = (pointY - VISUAL.offset().top);
+		var offsetX = (pointX - parseInt(VISUAL.css("left")));
+		var offsetY = (pointY - parseInt(VISUAL.css("top")));
 
 		// Применяем изменения к элементу
 		VISUAL.css({
@@ -53,12 +54,16 @@ $(document).ready(function() {
 	// Обработчик колеса мыши
 	VISUAL.on('wheel', function(e){
 		e.preventDefault();
+		
+
+		//console.log(e);
+
 		let deltaY = e.originalEvent.deltaY;
 		
-		var mouseX = e.clientX - VISUAL.offset().left;
-		var mouseY = e.clientY - VISUAL.offset().top;
+		var mouseX = e.clientX - parseInt(VISUAL.css("left"));
+		var mouseY = e.clientY - parseInt(VISUAL.css("top"));
 
-		//console.log(mouseX, mouseY)
+		//console.log(MAP.width() * scale, MAP.height() * scale)
 
 		if (deltaY > 0) { 
 			zoom_to_point(mouseX, mouseY, 'out');

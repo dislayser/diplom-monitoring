@@ -205,7 +205,7 @@ $(document).ready(function() {
 
 		for (let i = 0; i < v_lines; i++) {
 			let v_line = $('<div>');
-			let posX = map.offset.x + ((i+1) * sector.x);
+			let posX = (map.offset.x % sector.x) + ((i+1) * sector.x);
 			v_line.attr({
 				'class':mesh.class,
 			});
@@ -222,7 +222,7 @@ $(document).ready(function() {
 		}
 		for (let i = 0; i < h_lines; i++) {
 			let h_line = $('<div>');
-			let posY = map.offset.y + ((i+1) * sector.y);
+			let posY = (map.offset.y % sector.y) + ((i+1) * sector.y);
 			h_line.attr({
 				'class':mesh.class,
 			});
@@ -235,6 +235,7 @@ $(document).ready(function() {
 				'opacity' : mesh.opacity,
                 'background-color': mesh.color,
             });
+			console.log(h_line);
 			VISUAL.append(h_line);
 		}
 	}

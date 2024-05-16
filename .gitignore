@@ -13,3 +13,4 @@ __pycache__/
 # TEST
 public/access.log
 config.py
+*.log

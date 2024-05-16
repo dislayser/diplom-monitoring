@@ -21,12 +21,14 @@
                     <ul class="navbar-nav">
 
                     <?php foreach($main_links as $link => $nav_item): ?>
-                        <?php if(($link == '/login.php' && !isset($_SESSION['auth'])) || ($link == '/logout.php' && isset($_SESSION['auth'])) || $link != '/login.php' && $link != '/logout.php'): ?>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-1" href="<?=$nav_item[1]?>">
-                                    <?=$nav_item[0]?>
-                                </a>
-                            </li>
+                        <?php if (!(isset($_SESSION["rule"]) && $_SESSION["rule"] != "admin" && $link == "/admin/index.php")):?>
+                            <?php if(($link == '/login.php' && !isset($_SESSION['auth'])) || ($link == '/logout.php' && isset($_SESSION['auth'])) || $link != '/login.php' && $link != '/logout.php'): ?>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-1" href="<?=$nav_item[1]?>">
+                                        <?=$nav_item[0]?>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
 

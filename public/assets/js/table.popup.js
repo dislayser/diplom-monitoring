@@ -44,6 +44,9 @@ $(document).ready(function() {
             data: post,
         });
 
+        toasts.params.msg = `Строка удалена.`;
+        toasts.create();
+
         hide_menu();
         tr_item.remove();
     });
