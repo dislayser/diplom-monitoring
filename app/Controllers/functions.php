@@ -1,6 +1,7 @@
 <?php
 //Для работы с токенами
 include 'Token.php';
+include 'File.php';
 
 //Функция для тестрования массивов и тд
 function tt($value = []){

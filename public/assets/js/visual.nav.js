@@ -120,8 +120,6 @@ $(document).ready(function() {
 
             let deltaX = currentX - startX;
             let deltaY = currentY - startY;
-
-            console.log(deltaX, deltaY);
             
             VISUAL.css('left', (v_left + (deltaX)) + "px");
             VISUAL.css('top',  (v_top  + (deltaY)) + "px");

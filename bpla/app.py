@@ -8,15 +8,17 @@ import noise
 # Полный API URL
 URL = config.api_url + config.api_url_path
 
-def rand_num(min_value, max_value):
-    min_value = min_value * 10
-    max_value = max_value * 10
-    return random.uniform(min_value, max_value) / 10
+def rand_num(min_value, max_value, chars=2):
+    i = 10 ** chars
+    min_value = min_value * i
+    max_value = max_value * i
+    return random.uniform(min_value, max_value) / i
 
+# Генерация данных
 def rand_data(matrix_data):
     # Инициализация пустой матрицы данных
     data = {}
-    lacunarity = rand_num(2, 2.5)
+    lacunarity = rand_num(2, 2.2)
 
     # Проходим по всем столбцам матрицы
     for i in range(matrix_data['x']):
@@ -58,7 +60,6 @@ matrix_params = {
         ['O3', 3, 5],
         ['PM10', 20, 50],
         ['PM25', 10, 25],
-        ['Test', 100, 50],
     ],
     'miss': [
         [-1, 0],
@@ -67,29 +68,35 @@ matrix_params = {
 }
 
 # Отправка запроса 
-def post(data):
-    response = requests.post(URL, data=data)
-    if response.status_code == 200:
-        return 'Ответ от API: ', response.text
-    else:
-        print('Произошла ошибка при отправке запроса:', response.text)
+def post(data, file_path):
+    try:
+        response = requests.post(URL, data=data)
+            
+        if response.status_code == 200:
+            return 'Ответ от API: ', response.text
+        else:
+            print('Произошла ошибка при отправке запроса:', response.text)
+    except Exception as e:
+        print(f'Ошибка при открытии файла: {e}')
 
 def main():
-    print('Скрипт с генерацией данный по газам запущен:')
+    print('Скрипт с генерацией данных по газам запущен:')
     print('Интервал между запросами: ', config.gen_interval, 'сек.')
 
-    while (True):           
+    file_path = '/var/www/gastrack.opfobos.ru/bpla/img/1.png'  # Замените на путь к вашему файлу
+
+    while True:           
         data = {
             "id" : config.device_id,
             "api_token" : config.device_token,
             "data" : rand_data(matrix_params)
         }
 
-        # Записывает резальтат выволнения запроса и выводим
-        result = post(data=data)
+        # Записываем результат выполнения запроса и выводим
+        result = post(data=data, file_path=file_path)
         print(result)
 
-        #Задаем интервал
+        # Задаем интервал
         time.sleep(config.gen_interval)
 
 # Автозапуск

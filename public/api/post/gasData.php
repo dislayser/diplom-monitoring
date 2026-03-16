@@ -11,6 +11,7 @@ header('Content-Type: application/json');
 
 $table_name = 'gas_data';
 
+//output($_FILES, 404);
 // Обработка данных полученных от БПЛА по API
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     //Проверка API токена
@@ -29,6 +30,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             if (isset($_POST['map_file']) && !empty($_POST['map_file'])){
                 $file = $_POST['map_file'];
             } 
+            
+            //Обработка файла
+            if (isset($_FILES['map_file']) && !empty($_FILES['map_file'])){                            
+                $allowedTypes = ['image/jpeg', 'image/png'];
+                $maxSize = 5 * 1024 * 1024; // 5 MB
+                $uploadDir = DIR . 'public/assets/img/data/monitoring/';
+
+                $file = $_FILES['map_file'];
+
+                $valid_file = file_check($file, $allowedTypes, $maxSize);
+                if ($valid_file === true){
+                    $saveResult = file_save($file, $uploadDir);
+                    if (is_string($saveResult)) {
+                        $file = $saveResult;
+                    } else {
+                        output(['error_desc' => $saveResult], 404);
+                    }
+                }else{
+                    output(['error_desc' => $valid_file], 404);
+                }
+            }
             
             //gas_data в json
             $params = [
