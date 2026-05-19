@@ -18,7 +18,7 @@ require(DIR.'app/Controllers/Auth.php');
     
     <?php include(DIR . 'app/Views/Header.php');?>
     
-    <div class="overflow-x-auto overflow-auto position-relative" style="overflow: hidden!important;">
+    <div class="overflow-x-auto overflow-auto position-relative h-100" style="overflow: hidden!important;">
         <!-- Кнопка меню -->
         <div class="z-3 position-fixed start-0 ms-3 mt-3" >
             <button class="btn btn-primary opacity-75" data-bs-toggle="offcanvas" data-bs-target="#control_panel" aria-controls="offcanvasScrolling"><i class="bi-list"></i></button>

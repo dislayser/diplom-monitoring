@@ -51,8 +51,8 @@ def rand_data(matrix_data):
 
 # Параметры для генерации данных
 matrix_params = {
-    'x': 38,
-    'y': 18,
+    'x': 22,
+    'y': 15,
     'keys': [
         ['Temp', 7, 20],
         ['SO2', 10, 22],

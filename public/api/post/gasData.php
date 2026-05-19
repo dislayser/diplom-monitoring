@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             }
 
             //Файл
-            $file = '1.png';
+            $file = '2.jpg';
             if (isset($_POST['map_file']) && !empty($_POST['map_file'])){
                 $file = $_POST['map_file'];
             } 

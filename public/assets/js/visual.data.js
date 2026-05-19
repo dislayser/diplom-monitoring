@@ -1,6 +1,7 @@
 let DB_GAS = [];
 function device_change(){};
-$(document).ready(function() {
+
+$(function() {
 	// HTML OBJ
 	const VISUAL = $('#visual');
 	const IMG_MAP = $('img#map');
