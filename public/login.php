@@ -5,7 +5,6 @@ require(DIR.'app/Controllers/db_main.php');
 require(DIR.'app/Controllers/functions.php');
 
 require(DIR.'app/Controllers/Login.php');
-tt($_SERVER);
 ?>
 <!DOCTYPE html>
 <html lang="ru" class="h-100" data-bs-theme="<?=isset($_COOKIE['theme']) ? $_COOKIE['theme'] : ''?>">
