@@ -1,133 +1,95 @@
-$(document).ready(function() {
+$(document).ready(function () {
 	const VISUAL = $('#visual');
-	const MAP = $("#map");
-	// Настройка масштабирования
-	let scale = parseFloat(VISUAL.css("transform").split("(")[1].split(")")[0]);
-	var minScale = 0.2;
-	var maxScale = 3;
-	var step = 0.1;
+	const minScale = 0.2;
+	const maxScale = 3;
+	const step = 0.1;
 
-	function zoom_in(){
-		if (scale < maxScale) {
-			scale += step;
-			VISUAL.css("transform", "scale(" + scale + ")");
-		}
-	}
+	// Read initial scale from computed transform matrix: matrix(s, 0, 0, s, 0, 0)
+	const computedTransform = VISUAL.css("transform");
+	let scale = (computedTransform && computedTransform !== 'none')
+		? (parseFloat(computedTransform.split("(")[1]) || 1)
+		: 1;
 
-	function zoom_out(){
-		if (scale > minScale) {
-			scale -= step;
-			VISUAL.css("transform", "scale(" + scale + ")");
-		}
-	}
-
-	// Функция для масштабирования к точке, куда смотрит мышь
-	function zoom_to_point(pointX, pointY, direction){
-
-		// Изменяем масштаб
-		if(direction === 'in' && scale < maxScale) {
-			scale += step;
-		} else if(direction === 'out' && scale > minScale) {
-			scale -= step;
-		}
-
-		// Определяем новые координаты для смещения элемента
-		var offsetX = (pointX - parseInt(VISUAL.css("left")));
-		var offsetY = (pointY - parseInt(VISUAL.css("top")));
-
-		// Применяем изменения к элементу
+	// Switch to center-based transform-origin and compensate left/top so the
+	// element doesn't visually jump (the inline style has a hardcoded origin).
+	{
+		const originParts = VISUAL.css("transform-origin").split(" ");
+		const ox = parseFloat(originParts[0]);
+		const oy = parseFloat(originParts[1]);
+		const W  = VISUAL.outerWidth();
+		const H  = VISUAL.outerHeight();
+		const L  = parseFloat(VISUAL.css("left")) || 0;
+		const T  = parseFloat(VISUAL.css("top"))  || 0;
 		VISUAL.css({
-			"transform": "scale(" + scale + ")",
-			"transform-origin": pointX + "px " + pointY + "px",
+			"transform-origin": "50% 50%",
+			"left": (L + (W / 2 - ox) * (scale - 1)) + "px",
+			"top":  (T + (H / 2 - oy) * (scale - 1)) + "px",
 		});
 	}
 
+	function clamp(s) {
+		return Math.round(Math.min(maxScale, Math.max(minScale, s)) * 10) / 10;
+	}
+
+	// Scale around an optional viewport point (clientX/clientY).
+	// With transform-origin: 50% 50%, the element's center stays fixed on pure
+	// scale change, so we shift left/top to keep the cursor-pointed spot fixed.
+	function setScale(newScale, mx, my) {
+		const oldScale = scale;
+		scale = clamp(newScale);
+		if (scale === oldScale) return;
+
+		const update = { "transform": "scale(" + scale + ")" };
+
+		if (mx !== undefined) {
+			const rect = VISUAL[0].getBoundingClientRect();
+			const cx   = rect.left + rect.width  / 2;
+			const cy   = rect.top  + rect.height / 2;
+			const ratio = (oldScale - scale) / oldScale;
+			update["left"] = ((parseFloat(VISUAL.css("left")) || 0) + (mx - cx) * ratio) + "px";
+			update["top"]  = ((parseFloat(VISUAL.css("top"))  || 0) + (my - cy) * ratio) + "px";
+		}
+
+		VISUAL.css(update);
+	}
+
 	// Кнопки
-	$("#zoom-in").click(function() {zoom_in();});
-	$("#zoom-out").click(function() {zoom_out();});
+	$("#zoom-in").click(function ()  { setScale(scale + step); });
+	$("#zoom-out").click(function () { setScale(scale - step); });
 
-	// Для перемещения мышкой
-	VISUAL.draggable({
-		cursor: "move",
-	});
+	// Перемещение мышкой
+	VISUAL.draggable({ cursor: "move" });
 
-	// Обработчик колеса мыши
-	VISUAL.on('wheel', function(e){
+	// Колёсико мыши
+	VISUAL.on('wheel', function (e) {
 		e.preventDefault();
-		
-
-		//console.log(e);
-
-		let deltaY = e.originalEvent.deltaY;
-		
-		var mouseX = e.clientX - parseInt(VISUAL.css("left"));
-		var mouseY = e.clientY - parseInt(VISUAL.css("top"));
-
-		//console.log(MAP.width() * scale, MAP.height() * scale)
-
-		if (deltaY > 0) { 
-			zoom_to_point(mouseX, mouseY, 'out');
-		}
-		if (deltaY < 0) { 
-			zoom_to_point(mouseX, mouseY, 'in');
-		}
+		const dir = e.originalEvent.deltaY < 0 ? step : -step;
+		setScale(scale + dir, e.clientX, e.clientY);
 	});
 
-	//Навигация для мобильных устройств
-	if (isMobile) {
-		mobile_draggable();
-	}
-	function mobile_draggable(){
-		
-        let startX;
-        let startY;
-        let isDragging = false;
-
-        
-        let v_left, v_top; 
-
-
-        const VISUAL = $('#visual');
-
-        VISUAL.on('touchstart mousedown', function(event) {
-            if (event.type === 'mousedown') {
-                isDragging = true;
-            } else {
-                startX = event.originalEvent.touches[0].clientX;
-                startY = event.originalEvent.touches[0].clientY;
-                
-                v_left = parseInt(VISUAL.css("left"));
-                v_top = parseInt(VISUAL.css("top"));
-            }
-        });
-
-        VISUAL.on('touchmove mousemove', function(event) {
-            event.preventDefault(); // предотвращаем прокрутку страницы при свайпе
-
-            if (isDragging) {
-                return; // если уже перетаскиваем элемент, не обрабатываем свайпы
-            }
-
-            let currentX, currentY;
-
-            if (event.type === 'mousemove') {
-                currentX = event.clientX;
-                currentY = event.clientY;
-            } else {
-                currentX = event.originalEvent.touches[0].clientX;
-                currentY = event.originalEvent.touches[0].clientY;
-            }
-
-            let deltaX = currentX - startX;
-            let deltaY = currentY - startY;
-            
-            VISUAL.css('left', (v_left + (deltaX)) + "px");
-            VISUAL.css('top',  (v_top  + (deltaY)) + "px");
-        });
-
-        $(document).on('mouseup touchend', function() {
-            isDragging = false;
-        });
+	// Навигация для мобильных устройств
+	if (typeof isMobile !== 'undefined' && isMobile) {
+		mobileDraggable();
 	}
 
+	function mobileDraggable() {
+		let startX, startY, v_left, v_top;
+
+		VISUAL.on('touchstart', function (event) {
+			const touch = event.originalEvent.touches[0];
+			startX = touch.clientX;
+			startY = touch.clientY;
+			v_left = parseFloat(VISUAL.css("left")) || 0;
+			v_top  = parseFloat(VISUAL.css("top"))  || 0;
+		});
+
+		VISUAL.on('touchmove', function (event) {
+			event.preventDefault();
+			const touch = event.originalEvent.touches[0];
+			VISUAL.css({
+				'left': (v_left + touch.clientX - startX) + "px",
+				'top':  (v_top  + touch.clientY - startY) + "px",
+			});
+		});
+	}
 });
