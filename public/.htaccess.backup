@@ -1,4 +1,12 @@
+Options -Indexes
 RewriteEngine On
+
+# Страница 404
+ErrorDocument 404 /error/404.php
+ErrorDocument 403 /error/403.php
+
+# Изменяем путь по умолчанию: favicon
+Redirect "/favicon.ico" "/assets/icons/display.svg"
 
 # Перенаправление на файл orders.php, если он существует
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -9,3 +17,6 @@ RewriteRule ^([^\.]+)$ $1.html [NC,L]
 # Убираем слэш в конце адреса
 RewriteCond %{REQUEST_URI} .+/$ [NC]
 RewriteRule ^(.+)(/)$ $1 [L,R=301]
+
+# Заменяем 403 на 404
+#RewriteRule .* - [R=404,L]

@@ -7,7 +7,7 @@ include 'File.php';
 function tt($value = []){
     echo '<pre>';
     print_r($value);
-    echo '<pre>';
+    echo '</pre>';
 }
 
 //Преобразует строку/массивы для вставки как текст на HTML страницу, для предотвращения xss аттак

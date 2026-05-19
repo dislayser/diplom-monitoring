@@ -8,15 +8,19 @@ ErrorDocument 403 /error/403.php
 # Изменяем путь по умолчанию: favicon
 Redirect "/favicon.ico" "/assets/icons/display.svg"
 
+# ВАЖНО: Исключаем существующие файлы (CSS, JS, изображения) из перезаписи
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
 # Перенаправление на файл orders.php, если он существует
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.+)$ $1.php [L,QSA]
-RewriteRule ^([^\.]+)$ $1.html [NC,L]
 
 # Убираем слэш в конце адреса
 RewriteCond %{REQUEST_URI} .+/$ [NC]
 RewriteRule ^(.+)(/)$ $1 [L,R=301]
 
-# Заменяем 403 на 404
-#RewriteRule .* - [R=404,L]
+# Заменяем 403 на 404 (раскомментируйте если нужно)
+# RewriteRule .* - [R=404,L]

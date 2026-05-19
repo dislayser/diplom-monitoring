@@ -3,8 +3,8 @@
 define('DIR',                    __DIR__."/../../");
 define('ROOT_AMPPS',             __DIR__."/../../../");
 //Конфигурация с ссылками
-$domain = 'gastrack.opfobos.ru';
-define('BASE_URL',              $_SERVER['REQUEST_SCHEME'].'://'.$domain.'/');
+// $domain = 'gastrack.opfobos.ru';
+define('BASE_URL',              '/');
 define('PROFILE_URL',           BASE_URL . 'profile');
 define('MONITORING_URL',        BASE_URL . 'monitoring');
 define('DEVICES_URL',           BASE_URL . 'devices');

@@ -1,3 +1,9 @@
+<?php
+$css = '';
+if(isset($_SESSION['theme']) && !empty($_SESSION['theme'])){
+    $css = '/themes/' . $_SESSION['theme'];
+}
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +13,11 @@
     <meta name="description" content="<?=SITE_NAME?> - веб-приложение, для мониторинга газа в местности сотрудниками компании">
     <meta name="keywords" content="Удобный интерфейс, мониторинг, веб-приложение, <?=SITE_NAME?>">
     <!-- Подключение Bootstrap -->
-    <?php
-    $css = '';
-    if(isset($_SESSION['theme']) && !empty($_SESSION['theme'])){
-        $css = '/themes/' . $_SESSION['theme'];
-    }
-    ?>
-    <link href="<?=BASE_URL?>assets/css<?=$css?>/bootstrap.min.css" rel="stylesheet" id="main_css">
-    <link href="<?=BASE_URL?>assets/css/bootstrap.dropdowns.css" rel="stylesheet">
-    <link href="<?=BASE_URL?>assets/icons/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?=BASE_URL?>assets/css<?=$css?>/bootstrap.min.css"  id="main_css">
+    <link rel="stylesheet" href="<?=BASE_URL?>assets/css/bootstrap.dropdowns.css">
+    <link rel="stylesheet" href="<?=BASE_URL?>assets/icons/bootstrap-icons/bootstrap-icons.min.css">
     <!-- Мои стили -->
-    <link href="<?=BASE_URL?>assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?=BASE_URL?>assets/css/style.css">
     <!-- JS библиотеки -->
     <script src="<?=BASE_URL?>assets/js/jquery-3.7.1.min.js"></script>
     <script src="<?=BASE_URL?>assets/js/jquery-ui-1.13.2.min.js"></script>
